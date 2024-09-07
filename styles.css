@@ -1,3 +1,8 @@
+main{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
 .img1 {
   content: url("https://picsum.photos/id/237/200/300");
 }
@@ -16,7 +21,7 @@
   content: url("https://picsum.photos/200/300.jpg");
 }
 
-img {
+.img {
   margin: 10px;
   border: 5px solid #555;
   width: 10%;
