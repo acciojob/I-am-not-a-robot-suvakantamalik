@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 	// shuffle function to randomize array
 	function shuffle(array) {
-		for(int i=arra.length-1; i>0; i--){
+		for(let i=array.length-1; i>0; i--){
 			const j = Math.floor(Math.random() * (i + 1));
 			[array[i], array[j]] = [array[j], array[i]];
 		}
@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	}	
 
 	// Renders the images inside the divs
-	function randerImg() {
+	function renderImg() {
 		// Clear selected state
 		selectedImg = [];
 		resetBtn.style.display = 'none';
@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		allImgs.forEach((imgClass, idx) => {
 			divs[idx].className = `${imgClass} img`;
 			divs[idx].addEventListener("click", onImgClick);
-		});		
+		});
 	}
 
 	// When an image div is clicked
@@ -71,7 +71,36 @@ document.addEventListener("DOMContentLoaded", () => {
 		}
 	}
 
+	// Reset the game
+	function resetGame() {
+		// Remove selected state from all images
+		[...imageContainer.children].forEach((img1) => {
+			img1.classList.remove("selected");
+		});
+		selectedImg = [];
+		resetBtn.style.display = "none";
+		verifyBtn.style.display = "none";
+		para.innerHTML = "";
+	}
+
+	// Verify if the selected images are identical
+	function verifySeelection() {
+		const firstImgClass = selectedImg[0].classList[0];
+		const secondImgClass = selectedImg[1].classList[0];
+
+		if(firstImgClass === secondImgClass){
+			para.innerHTML = "You are a human. Congratulations!";
+		}
+		else{
+			para.innerHTML = "We can't verify you as a human. You selected the non-identical tiles.";
+		}
+		verifyBtn.style.display = "none";
+	}
+
+	// Attach event listeners for reset and verify buttons
+	resetBtn.addEventListener("click", resetGame);
+	verifyBtn.addEventListener("click", verifySeelection);
 	
 	// Initialize the game by rendering the images
-	randerImg();
+	renderImg();
 });
